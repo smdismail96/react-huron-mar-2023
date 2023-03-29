@@ -26,20 +26,34 @@
         );
       };
       
-      const RainfallReport = ( { r, ru, rainfallForNext5Days } ) => {
+      const RainfallReport = ( { r, ru, rainfallForNext5Days, inCm, inM } ) => {
         return (
             <div className="alert alert-secondary my-3">
               <h2>Rainfall</h2>
               <hr />
-              <div>{r} {ru}</div>
-              <div>
-                {/* TASK: Render the rainfasslForNext5Days */}
-              </div>
+              <div>{inCm( r )} cm</div>
+              <h3 className="my-3">Rainfall predicted for next 5 days</h3>
+              <ol>
+                {
+                  rainfallForNext5Days?.map( ( r, idx ) => (
+                    <li key={idx}>
+                      {
+                        r > 5 ? (
+                          <i className="fa-solid fa-cloud-sun-rain"></i>
+                        ) : (
+                          <i className="fa-solid fa-cloud-rain"></i>
+                        )
+                      }
+                      {' '} {inCm( r )} cm
+                    </li> 
+                  ))
+                }
+              </ol>
             </div>
         );
       };
     
-      const WeatherReport = ( { city, date, temperature, isCloudy, rainfall, rainfallUnits, rainfallForNext5Days } ) => {
+      const WeatherReport = ( { city, date, temperature, isCloudy, rainfall, rainfallUnits, rainfallForNext5Days, inCm, inM } ) => {
         return (
           <div className="container">
             <div className="h1">{city}</div>
@@ -56,6 +70,8 @@
               r={rainfall}
               ru={rainfallUnits}
               rainfallForNext5Days={rainfallForNext5Days}
+              inCm={inCm}
+              inM={inM}
             />
           </div>
         )
@@ -65,21 +81,48 @@
       const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
       
       // props can have any data type - except hard-coded string, we need to pass non-string props using {}
+      function inCm( inMm ) {
+        return inMm / 10;
+      }
+
+      // props spread operator to pass props - the keys in the object, become the props
+      const props = {
+        city: "Bengaluru",
+        date: "2023-03-29",
+        temperature: {
+          min: 20,
+          max: 30,
+          units: "C"
+        },
+        isCloudy: true,
+        rainfall: 10,
+        rainfallForNext5Days: [ 5, 10, 15, 10, 5 ],
+        rainfallUnits: "mm",
+        inCm: inCm,
+        inM: ( inMm ) => inMm / 100
+      };
+
       root.render(
-        <WeatherReport
-          city="Bengaluru"
-          date="2023-03-29"
-          temperature={{
-            min: 20,
-            max: 30,
-            units: "C"
-          }}
-          isCloudy={true}
-          rainfall={10}
-          rainfallForNext5Days={[ 5, 10, 15, 10, 5 ]}
-          rainfallUnits="mm"
-        />
+        <WeatherReport {...props} />
       );
+
+      // root.render(
+      //   <WeatherReport
+      //     city="Bengaluru"
+      //     date="2023-03-29"
+      //     temperature={{
+      //       min: 20,
+      //       max: 30,
+      //       units: "C"
+      //     }}
+      //     isCloudy={true}
+      //     rainfall={10}
+      //     rainfallForNext5Days={[ 5, 10, 15, 10, 5 ]}
+      //     rainfallUnits="mm"
+      //     inCm={inCm}
+      //     inM={( inMm ) => inMm / 100}
+      //   />
+      // );
     </script>
   </body>
 </html>
