@@ -28,13 +28,22 @@
 
             // class component render(), and the function of the function component, should be PURE
             function WorkshopsList() {
+                // useState() returns an array - [ variable, setter ]
+                const result = React.useState( [] );
+                const workshops = result[0];
+                const setWorkshops = result[1];
+
+                console.log( workshops );
+
                 // code involving "Side-effects" should be inside useEffect()
                 React.useEffect(
                   // side-effect goes in here
                   async () => {
                     try {
                       const data = await getWorkshops();
-                      console.log( data );
+                      // workshops = data;
+                      // Hey React, please update the workshops state
+                      setWorkshops( data );
                     } catch( error ) {
                       console.log( error );
                     }
@@ -45,6 +54,8 @@
                 return (
                     <div>
                         <h1>List of workshops</h1>
+                        <div>Loading list of workshops</div>
+                        <div>Number of workshops = {workshops.length}</div>
                     </div>
                 );
             }
