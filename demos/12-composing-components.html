@@ -1,4 +1,3 @@
-<!-- https://react.dev/learn/installation#try-react-locally -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,14 +5,10 @@
     <title>Hello World</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Architect -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    
-    <!-- Builder -->
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-    <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
@@ -30,23 +25,38 @@
           </div>
         );
       };
+      
+      const RainfallReport = ( { r, ru, rainfallForNext5Days } ) => {
+        return (
+            <div className="alert alert-secondary my-3">
+              <h2>Rainfall</h2>
+              <hr />
+              <div>{r} {ru}</div>
+              <div>
+                {/* TASK: Render the rainfasslForNext5Days */}
+              </div>
+            </div>
+        );
+      };
     
-      const WeatherReport = ( { city, date, temperature, rainfall, rainfallUnits  } ) => {
+      const WeatherReport = ( { city, date, temperature, isCloudy, rainfall, rainfallUnits, rainfallForNext5Days } ) => {
         return (
           <div className="container">
             <div className="h1">{city}</div>
             <hr />
             <div>Weather on {(new Date( date )).toDateString()}</div>
             
+            {isCloudy && <div><i className="fa-solid fa-umbrella"></i> Don't forget to carry your umbrella!</div>}
+            
             <TemperatureReport
               temperature={temperature}
             />
             
-            <div className="alert alert-secondary my-3">
-              <h2>Rainfall</h2>
-              <hr />
-              <div>{rainfall} {rainfallUnits}</div>
-            </div>
+            <RainfallReport
+              r={rainfall}
+              ru={rainfallUnits}
+              rainfallForNext5Days={rainfallForNext5Days}
+            />
           </div>
         )
       };
@@ -56,7 +66,7 @@
       
       // props can have any data type - except hard-coded string, we need to pass non-string props using {}
       root.render(
-        <TemperatureReport
+        <WeatherReport
           city="Bengaluru"
           date="2023-03-29"
           temperature={{
@@ -64,7 +74,9 @@
             max: 30,
             units: "C"
           }}
+          isCloudy={true}
           rainfall={10}
+          rainfallForNext5Days={[ 5, 10, 15, 10, 5 ]}
           rainfallUnits="mm"
         />
       );
