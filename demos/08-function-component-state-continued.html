@@ -14,7 +14,7 @@
         <script type="text/babel">
             const getWorkshops = async () => {
                 const response = await fetch(
-                    `https://workshops-server.herokuapp.com/workshop`
+                    `https://workshops-server.herokuapp.com/workshops`
                 );
 
                 if (!response.ok) {
@@ -31,25 +31,43 @@
                 // const workshops = result[0];
                 // const setWorkshops = result[1];
                 const [ error, setError ] = React.useState( null );
+                const [ completed, setCompleted ] = React.useState( false );
 
                 React.useEffect(
                   async () => {
                     try {
-                      const data = await getWorkshops();
-                      setWorkshops( data );
+                        const data = await getWorkshops();
+                        setWorkshops( data );
                     } catch( error ) {
-                      setError( error );
+                        setError( error );
+                    } finally {
+                        setCompleted( true );
                     }
                   },
                   []
                 );
 
+                // falsy values - 0, false, null, undefined, ''
                 return (
                     <div>
                         <h1>List of workshops</h1>
-                        <div>Loading list of workshops</div>
-                        <div>Number of workshops = {workshops.length}</div>
-                        <div>Error occured : {error?.message}</div>
+                        {
+                            /** if..else */
+                            !completed ? (
+                                <div>Loading list of workshops</div>
+                            ) : null
+                        }
+                        {
+                            /** if */
+                            completed && !error && (
+                                <div>Number of workshops = {workshops.length}</div>
+                            )
+                        }
+                        {
+                            completed && error && (
+                                <div>Error occured : {error?.message}</div>
+                            )
+                        }
                     </div>
                 );
             }
