@@ -1,17 +1,11 @@
-<!-- https://react.dev/learn/installation#try-react-locally -->
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
         <title>Hello World</title>
 
-        <!-- Architect -->
         <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-
-        <!-- Builder -->
         <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-        <!-- Don't use this in production: -->
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
         <style>
@@ -23,17 +17,7 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-            // TASK: Add a prop for text color and set it up on the button
-
-            // function Button() {
-              
-            // }
-            // PascalCase for component
-            // Example: props -> { text: 'Go to file' }
             const Button = ( props ) => {
-              console.log( 'props object = ', props );
-
-              // React uses object for specifying inline styles (and not string)
               const buttonStyle = {
                 display: 'inline-block',
                 padding: '0.5em',
@@ -47,10 +31,15 @@
               return <button style={buttonStyle}>{props.text}</button>;
             };
 
+            Button.defaultProps = {
+              backgroundColor: 'lightgray',
+              color: 'black',
+            };
+
             const el = (
               <div>
-                <Button text="Go to file" color="black" />
-                <Button text="Add file" backgroundColor="lightgray" color="black" />
+                <Button text="Go to file" />
+                <Button text="Add file" />
                 <Button text="Code" backgroundColor="green" color="white" />
               </div>
             );
