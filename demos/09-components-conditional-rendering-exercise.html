@@ -19,6 +19,7 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
+            // TASK: Add an icon for the button (classes for the icon shall be passed in a prop). If icon is not passed it should not be rendered.
             const Button = ( { text, color, backgroundColor } ) => {
               // const { text, color, backgroundColor } = props;
               
@@ -32,9 +33,12 @@
                 cursor: 'pointer'
               };
 
-              return <button style={buttonStyle}>
-                {text}
-              </button>;
+              return (
+                <button style={buttonStyle}>
+                  <i class="fa-solid fa-download"></i>
+                  {text}
+                </button>
+              );
             };
 
             Button.defaultProps = {

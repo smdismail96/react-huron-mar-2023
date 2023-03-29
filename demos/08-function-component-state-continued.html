@@ -47,10 +47,18 @@
                   []
                 );
 
+                // generating parts of the UI separately
+                // let loadingMessageEl = null;
+                // if( !completed ) {
+                //     loadingMessageEl = <div>Loading list of workshops</div>;
+                // }
+
+
                 // falsy values - 0, false, null, undefined, ''
                 return (
                     <div>
                         <h1>List of workshops</h1>
+                        {loadingMessageEl}
                         {
                             /** if..else */
                             !completed ? (
