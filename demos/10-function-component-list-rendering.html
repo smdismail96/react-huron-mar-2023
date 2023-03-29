@@ -67,6 +67,15 @@
                             completed && !error && (
                                 <ol>
                                     {
+                                        /** key should be
+                                         * i) unique among items of that array
+                                         * ii) be consistent across renders
+                                         * 
+                                         * Therefore array index is a bad choice (ii is violated)
+                                         */
+                                    }
+                                    {
+                                        // workshops.map( ( w, idx ) => <li key={idx}>{w.name}</li> )
                                         workshops.map( w => <li key={w.id}>{w.name}</li> )
                                     }
                                 </ol>

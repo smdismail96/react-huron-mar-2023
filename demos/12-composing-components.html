@@ -1,0 +1,72 @@
+<!-- https://react.dev/learn/installation#try-react-locally -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css">
+    
+    <!-- Architect -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    
+    <!-- Builder -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const TemperatureReport = ( { temperature } ) => {
+        return (
+          <div className="alert alert-primary my-3">
+            <h2>Temperature</h2>
+            <hr />
+            <div>Min: {temperature.min} {temperature.units}</div>
+            <div>Max: {temperature.max} {temperature.units}</div>
+          </div>
+        );
+      };
+    
+      const WeatherReport = ( { city, date, temperature, rainfall, rainfallUnits  } ) => {
+        return (
+          <div className="container">
+            <div className="h1">{city}</div>
+            <hr />
+            <div>Weather on {(new Date( date )).toDateString()}</div>
+            
+            <TemperatureReport
+              temperature={temperature}
+            />
+            
+            <div className="alert alert-secondary my-3">
+              <h2>Rainfall</h2>
+              <hr />
+              <div>{rainfall} {rainfallUnits}</div>
+            </div>
+          </div>
+        )
+      };
+
+
+      const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
+      
+      // props can have any data type - except hard-coded string, we need to pass non-string props using {}
+      root.render(
+        <TemperatureReport
+          city="Bengaluru"
+          date="2023-03-29"
+          temperature={{
+            min: 20,
+            max: 30,
+            units: "C"
+          }}
+          rainfall={10}
+          rainfallUnits="mm"
+        />
+      );
+    </script>
+  </body>
+</html>
