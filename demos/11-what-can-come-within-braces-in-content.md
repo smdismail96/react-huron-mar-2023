@@ -19,7 +19,7 @@
     {<div>Loading</div>}
 </div>
 
-// An array of any of these elements
+// An array of any of these elements (and every item in the array is rendered one after other)
 <div>
     {
         [
@@ -32,3 +32,13 @@
         ]
     }
 </div>
+
+<ol>
+    {
+        [
+            <li>Item 1</li>,
+            <li>Item 2</li>,
+            <li>Item 3</li>
+        ]
+    }
+</ol>

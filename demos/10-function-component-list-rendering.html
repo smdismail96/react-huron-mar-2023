@@ -44,13 +44,16 @@
                   []
                 );
 
-                const els = [];
-                for( let i = 0; i < workshops.length; i++ ) {
-                    const workshop = workshops[i];
-                    els.push( <li>{workshop.name}</li> );
-                }
+                // generate an array of React elements (using for / map etc.)
+                // const els = [];
+                // for( let i = 0; i < workshops.length; i++ ) {
+                //     const workshop = workshops[i];
+                //     els.push( <li>{workshop.name}</li> );
+                // }
 
-                console.log( els );
+                // const els = workshops.map( w => <li>{w.name}</li> )
+
+                // console.log( els );
 
                 return (
                     <div>
@@ -62,7 +65,11 @@
                         }
                         {
                             completed && !error && (
-                                <ol>{els}</ol>
+                                <ol>
+                                    {
+                                        workshops.map( w => <li key={w.id}>{w.name}</li> )
+                                    }
+                                </ol>
                             )
                         }
                         {
