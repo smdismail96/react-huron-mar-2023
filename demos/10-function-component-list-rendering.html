@@ -26,10 +26,7 @@
             };
 
             function WorkshopsList() {
-                // array destructuring to simplify assignments
                 const [ workshops, setWorkshops ] = React.useState( [] );
-                // const workshops = result[0];
-                // const setWorkshops = result[1];
                 const [ error, setError ] = React.useState( null );
                 const [ completed, setCompleted ] = React.useState( false );
 
@@ -47,28 +44,25 @@
                   []
                 );
 
-                // generating parts of the UI separately
-                let loadingMessageEl = null;
-                if( !completed ) {
-                    loadingMessageEl = <div>Loading list of workshops</div>;
+                const els = [];
+                for( let i = 0; i < workshops.length; i++ ) {
+                    const workshop = workshops[i];
+                    els.push( <li>{workshop.name}</li> );
                 }
 
+                console.log( els );
 
-                // falsy values - 0, false, null, undefined, ''
                 return (
                     <div>
-                        <h1>List of workshops</h1>
-                        {loadingMessageEl}
+                        <h1>{'List of workshops'}</h1>
                         {
-                            /** if..else */
                             !completed ? (
                                 <div>Loading list of workshops</div>
                             ) : null
                         }
                         {
-                            /** if */
                             completed && !error && (
-                                <div>Number of workshops = {workshops.length}</div>
+                                <ol>{els}</ol>
                             )
                         }
                         {

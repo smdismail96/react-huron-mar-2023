@@ -20,7 +20,7 @@
         <div id="root"></div>
         <script type="text/babel">
             // TASK: Add an icon for the button (classes for the icon shall be passed in a prop). If icon is not passed it should not be rendered.
-            const Button = ( { text, color, backgroundColor } ) => {
+            const Button = ( { text, color, backgroundColor, icon } ) => {
               // const { text, color, backgroundColor } = props;
               
               const buttonStyle = {
@@ -33,9 +33,17 @@
                 cursor: 'pointer'
               };
 
+              // for -> htmlFor
+              // <label htmlFor="official-email">Official email id</label>
+              // <input type="email" id="official-email" />
+
               return (
                 <button style={buttonStyle}>
-                  <i class="fa-solid fa-download"></i>
+                  {
+                    icon && (
+                      <i className={'fa-solid ' + icon}></i>
+                    )
+                  }
                   {text}
                 </button>
               );
@@ -48,8 +56,8 @@
 
             const el = (
               <div>
-                <Button text="Go to file" />
-                <Button text="Add file" />
+                <Button text="Go to file" icon="fa-download" />
+                <Button text="Add file" icon="fa-plus" />
                 <Button text="Code" backgroundColor="green" color="white" />
               </div>
             );
