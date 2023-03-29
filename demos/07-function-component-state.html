@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello World</title>
+
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const getWorkshops = async () => {
+                const response = await fetch(
+                    `https://workshops-server.herokuapp.com/workshops`
+                );
+
+                // got a response but it is an error
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+
+                const data = await response.json();
+                return data;
+            };
+
+            // class component render(), and the function of the function component, should be PURE
+            function WorkshopsList() {
+                // code involving "Side-effects" should be inside useEffect()
+                React.useEffect(
+                  // side-effect goes in here
+                  async () => {
+                    try {
+                      const data = await getWorkshops();
+                      console.log( data );
+                    } catch( error ) {
+                      console.log( error );
+                    }
+                  },
+                  [] // only on page load - 2nd argument to useEffect() is an empty array
+                );
+
+                return (
+                    <div>
+                        <h1>List of workshops</h1>
+                    </div>
+                );
+            }
+
+            const container = document.getElementById("root");
+            const root = ReactDOM.createRoot(container);
+            root.render(<WorkshopsList />);
+        </script>
+    </body>
+</html>
