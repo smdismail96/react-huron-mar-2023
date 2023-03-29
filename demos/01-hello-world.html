@@ -1,0 +1,51 @@
+<!-- https://react.dev/learn/installation#try-react-locally -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    
+    <!-- Architect -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    
+    <!-- Builder -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <!--
+      <div id="message" title="Introduction to React">
+        Hello <strong>React</strong>
+      </div>
+    -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+    
+      // define the UI (React element / React node)
+      const divEl = React.createElement(
+        'div',
+        { // props (like attributes)
+          id: 'message',
+          title: 'Introduction to React'
+        },
+        'Hello ',
+        React.createElement(
+          'strong',
+          null, // or {}
+          'React'
+        )
+      );
+
+      console.log( divEl );
+      console.log( divEl.props ); // props contains both attributes AND children
+
+      // v18 API for rendering top-level element
+      const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
+      root.render( divEl );
+
+    </script>
+  </body>
+</html>
