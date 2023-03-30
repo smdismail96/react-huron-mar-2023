@@ -27,22 +27,15 @@
                 );
             };
 
-            const PanelAnswer = ({ answer, show }) => {
-                return show ? <div className="p-2">{answer}</div> : null;
+            const PanelAnswer = ({ answer, isOpen }) => {
+                return isOpen ? <div className="p-2">{answer}</div> : null;
             };
 
             const Panel = ({ question, answer, isOpen, open }) => {
-                const [show, setShow] = React.useState(isOpen);
-
-                // if Accordion (parent) passes trye, then set true; if false, then set false
-                React.useEffect(() => {
-                    setShow(isOpen);
-                }, [isOpen]);
-
                 return (
                     <div className="border border-primary">
                         <PanelQuestion question={question} open={open} />
-                        <PanelAnswer answer={answer} show={show} />
+                        <PanelAnswer answer={answer} isOpen={isOpen} />
                     </div>
                 );
             };
