@@ -8,6 +8,8 @@
 
 -   Day 1 : March 29
     -   React - Lab guide.pdf - Q. 6, 7, 8, 9
+-   Day 2 : March 30
+    -   React - Lab guide.pdf - Q. 10 (short) / 11 (long), 14 (optional - you need to register at the website and wait for API key to be activated)
 
 ## References
 
