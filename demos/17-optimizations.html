@@ -19,7 +19,8 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-            const PanelQuestion = ({ question, toggle }) => {
+            // React.memo() makes sure that the component does not render when same old prop (values) are passed
+            const PanelQuestion = React.memo(({ question, toggle }) => {
                 console.log("render PanelQuestion");
 
                 return (
@@ -27,7 +28,7 @@
                         {question}
                     </div>
                 );
-            };
+            });
 
             const PanelAnswer = ({ answer, show }) => {
                 console.log("render PanelAnswer");
@@ -39,7 +40,11 @@
                 console.log("render Panel");
 
                 const [show, setShow] = React.useState(true);
-                const toggle = () => setShow((s) => !s);
+                // () => setShow((s) => !s) is recreated everytime if we do not use useCallback
+                const toggle = React.useCallback(
+                    () => setShow((s) => !s),
+                    [setShow]
+                );
 
                 return (
                     <div className="border border-primary">
@@ -54,7 +59,7 @@
             root.render(
                 <div className="container my-5">
                     <Panel
-                        question="Where is common shared stored?"
+                        question="Where is common shared state stored?"
                         answer="In the common ancestor"
                     />
                 </div>
