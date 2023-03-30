@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello World</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const PanelQuestion = ({ question, toggle, open }) => {
+                return (
+                    <div className="bg-primary text-light p-2" onClick={open}>
+                        {question}
+                    </div>
+                );
+            };
+
+            const PanelAnswer = ({ answer, show }) => {
+                return show ? <div className="p-2">{answer}</div> : null;
+            };
+
+            const Panel = ({ question, answer, isOpen, open }) => {
+                const [show, setShow] = React.useState(isOpen);
+
+                // if Accordion (parent) passes trye, then set true; if false, then set false
+                React.useEffect(() => {
+                    setShow(isOpen);
+                }, [isOpen]);
+
+                return (
+                    <div className="border border-primary">
+                        <PanelQuestion question={question} open={open} />
+                        <PanelAnswer answer={answer} show={show} />
+                    </div>
+                );
+            };
+
+            const Accordion = ({ qna }) => {
+                const [openIdx, setOpenIdx] = React.useState(-1);
+
+                return (
+                    <>
+                        {qna.map((item, idx) => (
+                            <Panel
+                                key={item.id}
+                                question={item.question}
+                                answer={item.answer}
+                                isOpen={idx === openIdx}
+                                open={() => setOpenIdx(idx)}
+                            />
+                        ))}
+                    </>
+                );
+            };
+
+            const qna = [
+                {
+                    id: 1,
+                    question: "Where is common shared state stored?",
+                    answer: "In the common ancestor",
+                },
+                {
+                    id: 2,
+                    question: "Any other way to share common state?",
+                    answer: "We can use context",
+                },
+                {
+                    id: 3,
+                    question:
+                        "Any other third-party library to share common state?",
+                    answer: "We can use Redux",
+                },
+            ];
+
+            const container = document.getElementById("root");
+            const root = ReactDOM.createRoot(container);
+            root.render(<Accordion qna={qna} />);
+        </script>
+    </body>
+</html>
