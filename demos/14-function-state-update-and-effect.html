@@ -39,6 +39,11 @@
                 const [completed, setCompleted] = React.useState(false);
                 const [page, setPage] = React.useState(1);
 
+                // Variations in useEffect usage (dependency array)
+                // [] -> run it on first render only
+                // [ var1, var2 ] -> run it on first render + when var1 / var2 change
+                // do not pass the array -> run on EVERY render
+
                 // the effect function can return i) undefined (nothing), or ii) a cleanup function
                 // async function always return a Promise object
                 // Morl of the story: We cannot make the effect function, an async function
@@ -67,6 +72,11 @@
                     },
                     [page /*, completed*/] // if completed is included then the effect will keep running as the completed state keeps changing in the effect
                 );
+
+                // No dependency array passed. It runs on EVERY render. Generally not useful.
+                React.useEffect(() => {
+                    console.log("render");
+                });
 
                 const previous = () => {
                     if (page <= 1) {
