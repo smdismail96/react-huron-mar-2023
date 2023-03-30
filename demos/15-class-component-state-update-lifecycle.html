@@ -58,6 +58,7 @@
                 };
 
                 next = () => {
+                    // For exploration: this is the object form of the setter. There is a "function form" as well that can be used.
                     this.setState({
                         page: this.state.page + 1,
                     });
@@ -137,11 +138,19 @@
                         this.fetchWorkshops();
                     }
                 }
+
+                componentWillUnmount() {
+                    console.log("bye");
+                }
             }
 
             const container = document.getElementById("root");
             const root = ReactDOM.createRoot(container);
             root.render(<WorkshopsList />);
+
+            setTimeout(() => {
+                root.render(<div>That's all folks!</div>);
+            }, 10000);
         </script>
     </body>
 </html>

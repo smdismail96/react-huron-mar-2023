@@ -1,24 +1,6 @@
 {
   "workshops": [
     {
-      "name": "Angular JS Bootcamp",
-      "id": 1,
-      "description": "<p><strong>AngularJS</strong> (also written as <strong>Angular.js</strong>) is a JavaScript-based open-source front-end web application framework mainly maintained by Google and by a community of individuals and corporations to address many of the challenges encountered in developing single-page applications.</p><p>It aims to simplify both the development and the testing of such applications by providing a framework for client-side model–view–controller (MVC) and model–view–viewmodel (MVVM) architectures, along with components commonly used in rich Internet applications. (This flexibility has led to the acronym MVW, which stands for \"model-view-whatever\" and may also encompass model–view–presenter and model–view–adapter.)</p>",
-      "startDate": "2019-01-01T04:00:00.000Z",
-      "endDate": "2019-01-03T08:00:00.000Z",
-      "time": "9:30 am - 1:30 pm",
-      "location": {
-        "address": "Tata Elxsi, Prestige Shantiniketan",
-        "city": "Bangalore",
-        "state": "Karnataka"
-      },
-      "modes": {
-        "inPerson": true,
-        "online": false
-      },
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/2000px-AngularJS_logo.svg.png"
-    },
-    {
       "name": "React JS Masterclass",
       "id": 2,
       "description": "<p><strong>React</strong> (also known as <strong>React.js</strong> or <strong>ReactJS</strong>) is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.</p><p>React can be used as a base in the development of single-page or mobile applications. Complex React applications usually require the use of additional libraries for state management, routing, and interaction with an API.</p>",
@@ -73,25 +55,6 @@
       "id": 4
     },
     {
-      "name": "HTML and CSS",
-      "description": "HTML and CSS introduction",
-      "startDate": "2019-11-05T07:00:00.000Z",
-      "endDate": "2019-11-06T07:00:00.000Z",
-      "time": "9:00 am - 5:00 pm",
-      "location": {
-        "address": "Zenmonics",
-        "city": "Bangalore",
-        "state": "Karnataka"
-      },
-      "modes": {
-        "inPerson": true,
-        "online": false
-      },
-      "imageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAz1BMVEXjTyb////vZSrr6+vpWijtYSnr8PHuWg7jQwv61czjRxbvYR7owrz++fb5y7/mnpDjSx7r5ePouLDhPgD2sZ3leGDiRhXiSRvlUybvYSHuVwDiQQb76OTr8/ThOgD6497xrqH98/D73NLyt6vwq53jUiroc1jqgWrmmovrinXpzsj31M30wbbsk4DnbVDjWTXnrqPkYD/q2NTxdkX1pYv3var2rpb0m3zzj2v5zb7mZkXxfVHwajDqZz3odVrovrXmi3jyimXxe075xbX0noHFi51LAAANlElEQVR4nN3d61rbOBAGYAI0MYaAwZAAIQnhFE5JOJRDabeFpfd/TWvT7kKlmfnksRQvzL99nm3wi030RRopM7W3tZHMvP/qLPxhmvnjv07aVV+eh0r7gvA4rvryPFS6Iwj3W1VfnodqNQXheVT15XmopCYIFzpVX56HmkjCflr15ZWvZCwJdz6AsH0iCZsf4J0mPpaEtQ8w4rcOROHk/ROjc1E4fv/Czpko/ACxLd0ThR8gthmhzRQevP8307QpCj9AbGvXRGH42Db/yXNt/vn6yaUs3AseauZnPZcpHMvC8LEtuHAoC5vvT2i8fnskC8PHttBCM7RZwsvQxNDCaB8Ij96b8JMpXAbCYejYFlpohjZLOAod23wL503hDhAGj23BhQMg3A8d20ILoxoQLr93YYKEwWObb6EZaR6QMHhsCy00Q5slHIT+cOFbaLy8FdosYe29/R0aL99agcL3lmlMoRnabOFDYKJnIQxttnD4voXpGRSOAgfT0MI+FK4Ejm2ehTC02cLQy8CBhXETCkPHtsDCiemxhWeBQ41nIQxtthAvA0flqlGmtpDwOxYOkDBaWypTZwslau/OJBoXZy4AU8Im+pCfXtXLlHUFhep2URbGVmizhbUJEHZO58pUOeEdELZ2HYQotkVL9eqET+",
-      "createdDate": "Jun 21, 2019",
-      "id": 5
-    },
-    {
       "name": "TypeScript",
       "description": "TypeScript language fundamentals",
       "startDate": "2019-06-24",
@@ -109,24 +72,6 @@
       "imageUrl": "https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png",
       "createdDate": "Jun 21, 2019",
       "id": 6
-    },
-    {
-      "name": "Angular",
-      "id": 7,
-      "description": "<p>Google's <strong>Angular</strong> framework, is a much sought-after skill in the industry today. It is a single-page application (SPA) framework that includes most of the features required to build SPA applications. The Angular training gets you prepared for building enterprise-grade applications using the latest version of Angular.</p>",
-      "startDate": "2019-11-01T04:00:00.000Z",
-      "endDate": "2019-11-03T08:00:00.000Z",
-      "time": "9:30 am - 1:30 pm",
-      "location": {
-        "address": "Tata Elxsi, Prestige Shantiniketan",
-        "city": "Bangalore",
-        "state": "Karnataka"
-      },
-      "modes": {
-        "inPerson": true,
-        "online": true
-      },
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/512px-Angular_full_color_logo.svg.png"
     },
     {
       "name": "Migrating from Angular JS to Angular",
@@ -239,61 +184,6 @@
     }
   ],
   "sessions": [
-    {
-      "id": 1,
-      "workshopId": 1,
-      "sequenceId": 1,
-      "name": "Introduction to Angular JS",
-      "speaker": "John Doe",
-      "duration": 1,
-      "level": "Basic",
-      "abstract": "In this session you will learn about the basics of Angular JS",
-      "upvoteCount": 19
-    },
-    {
-      "id": 2,
-      "workshopId": 1,
-      "sequenceId": 2,
-      "name": "Scopes in Angular JS",
-      "speaker": "John Doe",
-      "duration": 0.5,
-      "level": "Basic",
-      "abstract": "This session will take a closer look at scopes.  Learn what they do, how they do it, and how to get them to do it for you.",
-      "upvoteCount": -2
-    },
-    {
-      "id": 3,
-      "workshopId": 1,
-      "sequenceId": 3,
-      "name": "Controllers",
-      "speaker": "Jane Doe",
-      "duration": 2,
-      "level": "Basic",
-      "abstract": "Controllers are the beginning of everything Angular does. They contain business logic used by your views.",
-      "upvoteCount": 1
-    },
-    {
-      "id": 4,
-      "workshopId": 1,
-      "sequenceId": 4,
-      "name": "Services",
-      "speaker": "Jane Doe",
-      "duration": 3,
-      "level": "Intermediate",
-      "abstract": "Services implement the business logic that is used across an application. A common use case is to make backend calls.",
-      "upvoteCount": 0
-    },
-    {
-      "id": 5,
-      "workshopId": 1,
-      "sequenceId": 5,
-      "name": "Directives",
-      "speaker": "Rob Smith",
-      "duration": 4,
-      "level": "Advanced",
-      "abstract": "Directives are ways to teach HTML new tricks. Directives are either custom HTML elements or attributes. They encapsulate markup and functionality, and help create reusable widgets that can be used in the app at many places.",
-      "upvoteCount": 0
-    },
     {
       "id": 6,
       "workshopId": 2,
@@ -485,18 +375,6 @@
       "id": 23
     },
     {
-      "name": "Angular ngRx",
-      "abstract": "Angular",
-      "sequenceId": 123,
-      "speaker": "John Doe",
-      "duration": 3.5,
-      "level": "Intermediate",
-      "upvoteCount": 0,
-      "createdDate": "May 10, 2019",
-      "workshopId": "1",
-      "id": 24
-    },
-    {
       "workshopId": 6,
       "sequenceId": 1,
       "name": "Primitive data types",
@@ -519,39 +397,6 @@
       "upvoteCount": 0,
       "createdDate": "Aug 16, 2019",
       "id": 26
-    },
-    {
-      "id": 27,
-      "workshopId": 7,
-      "sequenceId": 1,
-      "name": "Introduction to Angular",
-      "speaker": "John Doe",
-      "duration": 1,
-      "level": "Basic",
-      "abstract": "In this session you will learn about the basics of Angular",
-      "upvoteCount": 8
-    },
-    {
-      "id": 28,
-      "workshopId": 7,
-      "sequenceId": 2,
-      "name": "Basics of RxJS",
-      "speaker": "John Doe",
-      "duration": 1.5,
-      "level": "Intermediate",
-      "abstract": "In this session you will learn about the basics of RxJS",
-      "upvoteCount": 15
-    },
-    {
-      "id": 29,
-      "workshopId": 7,
-      "sequenceId": 3,
-      "name": "Angular CLI",
-      "speaker": "Jane Doe",
-      "duration": 1.5,
-      "level": "Basic",
-      "abstract": "Various commands of the Angular CLI",
-      "upvoteCount": 5
     },
     {
       "id": 30,
