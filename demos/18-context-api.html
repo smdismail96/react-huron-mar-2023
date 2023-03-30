@@ -19,23 +19,37 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-            const PanelQuestion = ({ question, toggle, open }) => {
+            // Create a context to share accordion state
+            // When we create a context we get 2 components - Provider, Consumer (only for class component)
+            // We do not need Consumer for function components - useContext() is enough
+            const AccordionContext = React.createContext();
+
+            const PanelQuestion = ({ question, idx }) => {
+                // we get the entire value shared (object). We extract the setOpenIdx.
+                const { setOpenIdx } = React.useContext(AccordionContext);
+
                 return (
-                    <div className="bg-primary text-light p-2" onClick={open}>
+                    <div
+                        className="bg-primary text-light p-2"
+                        onClick={() => setOpenIdx(idx)}
+                    >
                         {question}
                     </div>
                 );
             };
 
-            const PanelAnswer = ({ answer, isOpen }) => {
-                return isOpen ? <div className="p-2">{answer}</div> : null;
+            const PanelAnswer = ({ answer, idx }) => {
+                const { openIdx } = React.useContext(AccordionContext);
+                return openIdx === idx ? (
+                    <div className="p-2">{answer}</div>
+                ) : null;
             };
 
-            const Panel = ({ question, answer, isOpen, open }) => {
+            const Panel = ({ question, answer, idx }) => {
                 return (
                     <div className="border border-primary">
-                        <PanelQuestion question={question} open={open} />
-                        <PanelAnswer answer={answer} isOpen={isOpen} />
+                        <PanelQuestion question={question} idx={idx} />
+                        <PanelAnswer answer={answer} idx={idx} />
                     </div>
                 );
             };
@@ -43,18 +57,22 @@
             const Accordion = ({ qna }) => {
                 const [openIdx, setOpenIdx] = React.useState(-1);
 
+                const value = {
+                    openIdx: openIdx,
+                    setOpenIdx: setOpenIdx,
+                };
+
                 return (
-                    <>
+                    <AccordionContext.Provider value={value}>
                         {qna.map((item, idx) => (
                             <Panel
                                 key={item.id}
                                 question={item.question}
                                 answer={item.answer}
-                                isOpen={idx === openIdx}
-                                open={() => setOpenIdx(idx)}
+                                idx={idx}
                             />
                         ))}
-                    </>
+                    </AccordionContext.Provider>
                 );
             };
 
