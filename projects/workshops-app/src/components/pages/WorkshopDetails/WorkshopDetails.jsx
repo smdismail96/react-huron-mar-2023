@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Image, Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+
+import SessionsList from '../../SessionsList/SessionsList';
+
 import { getWorkshopById } from '../../../services/workshops';
 
 const WorkshopDetails = () => {
@@ -43,16 +46,23 @@ const WorkshopDetails = () => {
             }
             {
                 !loading && !error && (
-                    <Row>
-                        <Col xs={12}>
-                            <h1>{workshop.name}</h1>
-                            <hr />
-                        </Col>
-                        <Col xs={12} lg={4}>
-                            <Image src={workshop.imageUrl} fluid />
-                        </Col>
-                        <Col xs={12} lg={8} dangerouslySetInnerHTML={{ __html: workshop.description }}></Col>
-                    </Row>
+                    <>
+                        <Row>
+                            <Col xs={12}>
+                                <h1>{workshop.name}</h1>
+                                <hr />
+                            </Col>
+                            <Col xs={12} lg={4}>
+                                <Image src={workshop.imageUrl} fluid />
+                            </Col>
+                            <Col xs={12} lg={8} dangerouslySetInnerHTML={{ __html: workshop.description }}></Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                                <SessionsList />
+                            </Col>
+                        </Row>
+                    </>
                 )
             }
         </>

@@ -10,8 +10,9 @@
     -   React - Lab guide.pdf - Q. 6, 7, 8, 9
 -   Day 2 : March 30
     -   React - Lab guide.pdf - Q. 10 (short) / 11 (long), 14 (optional - you need to register at the website and wait for API key to be activated)
--   Day 3 :Macrh 31
+-   Day 3 : March 31
     -   3 tasks on WorkshopsList page
+    -   1 task on SessionsList component (Workshop details page)
 
 ## Wroskhops app
 
