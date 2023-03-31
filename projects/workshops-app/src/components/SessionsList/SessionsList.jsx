@@ -1,6 +1,8 @@
 const SessionsList = () => {
     return (
         <div>
+            <h2>List of sessions</h2>
+            <hr />
             {/* Task 4 */}
             session list to be shown
             <div>
