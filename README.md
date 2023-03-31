@@ -14,3 +14,8 @@
 ## References
 
 -   https://www.robinwieruch.de/react-state-array-add-update-remove/
+-   https://legacy.reactjs.org/docs/context.html#contextconsumer
+
+## Exercises (discussions)
+
+-   https://gist.github.com/Arkamit/74591500e80938d33f64d7f08a2f7457
