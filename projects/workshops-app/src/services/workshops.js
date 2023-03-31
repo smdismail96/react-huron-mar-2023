@@ -11,6 +11,19 @@ const getWorkshops = async (page) => {
     return data; // a Promise is returned that resolves only when data is returned
 };
 
+const getWorkshopById = async (id) => {
+    const response = await fetch(
+        `https://workshops-server.herokuapp.com/workshops/${id}`
+    );
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    const data = await response.json();
+    return data;
+};
+
 const deleteWorkshop = async (id) => {
     const response = await fetch(
         `https://workshops-server.herokuapp.com/workshops/${id}`,
@@ -22,5 +35,6 @@ const deleteWorkshop = async (id) => {
 
 export {
     getWorkshops,
+    getWorkshopById,
     deleteWorkshop
 };

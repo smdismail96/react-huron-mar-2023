@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     SET_WORKSHOPS,
     SET_ERROR,
@@ -12,10 +13,6 @@ import workshopsReducer, { initialState } from '../../../reducers/workshops';
 import { getWorkshops, deleteWorkshop } from '../../../services/workshops';
 
 function WorkshopsList() {
-    // const [workshops, setWorkshops] = React.useState([]);
-    // const [error, setError] = React.useState(null);
-    // const [completed, setCompleted] = React.useState(false);
-    // const [page, setPage] = React.useState(1);
     const [state, dispatch] = React.useReducer(
         workshopsReducer,
         initialState
@@ -26,21 +23,16 @@ function WorkshopsList() {
     React.useEffect(() => {
         async function helper() {
             try {
-                // setCompleted(false);
                 dispatch({
-                    // action
                     type: SET_COMPLETED,
                     payload: false,
                 });
                 const data = await getWorkshops(page);
-                // setWorkshops(data);
                 dispatch({
-                    // action
                     type: SET_WORKSHOPS,
                     payload: data,
                 });
             } catch (error) {
-                // setError(error);
                 dispatch({
                     type: SET_ERROR,
                     payload: error,
@@ -63,7 +55,6 @@ function WorkshopsList() {
     };
 
     const next = (event) => {
-        // setPage((p) => p + 1);
         dispatch({
             type: NEXT_PAGE,
         });
@@ -74,6 +65,7 @@ function WorkshopsList() {
         try {
             await deleteWorkshop(id);
 
+            // TASK 1: reducer should have this logic (action type: DELETE_WORKSHOP, payload: id)
             const filteredWorkshops = workshops.filter(
                 (w) => w.id !== id
             );
@@ -112,9 +104,11 @@ function WorkshopsList() {
             ) : null}
             {completed && !error && (
                 <ol>
+                    {/* TASK 2: the list item can be a separate component, with the workshop as a prop */}
+                    {/* TASK 3: Use React Bootstrap Card component for the list item */}
                     {workshops.map((w) => (
-                        <li key={w.id} className="my-3">
-                            {w.name}
+                        <li key={w.id} className="my-3" >
+                            <Link to={"/workshops/" + w.id}>{w.name}</Link>
                             <button
                                 className="btn btn-danger btn-sm"
                                 onClick={(event) =>
@@ -124,13 +118,16 @@ function WorkshopsList() {
                                 Delete
                             </button>
                         </li>
-                    ))}
-                </ol>
+                    ))
+                    }
+                </ol >
             )}
-            {completed && error && (
-                <div>Error occured : {error?.message}</div>
-            )}
-        </div>
+            {
+                completed && error && (
+                    <div>Error occured : {error?.message}</div>
+                )
+            }
+        </div >
     );
 };
 
