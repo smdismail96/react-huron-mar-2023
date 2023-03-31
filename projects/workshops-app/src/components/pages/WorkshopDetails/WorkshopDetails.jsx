@@ -26,7 +26,7 @@ const WorkshopDetails = () => {
 
             helper();
         },
-        [ id ]
+        [id]
     );
 
     return (
@@ -44,13 +44,14 @@ const WorkshopDetails = () => {
             {
                 !loading && !error && (
                     <Row>
-                        <Col xs={12}>{workshop.name}</Col>
+                        <Col xs={12}>
+                            <h1>{workshop.name}</h1>
+                            <hr />
+                        </Col>
                         <Col xs={12} lg={4}>
-                            <Image src="" fluid />
+                            <Image src={workshop.imageUrl} fluid />
                         </Col>
-                        <Col xs={12} lg={8}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae aliquam eum esse quod pariatur dolorum est ducimus? Incidunt, amet quisquam praesentium quia cupiditate veritatis quis. Deserunt cumque doloremque doloribus nihil.
-                        </Col>
+                        <Col xs={12} lg={8} dangerouslySetInnerHTML={{ __html: workshop.description }}></Col>
                     </Row>
                 )
             }
