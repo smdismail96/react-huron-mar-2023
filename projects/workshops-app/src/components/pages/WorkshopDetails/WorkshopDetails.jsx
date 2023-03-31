@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Image, Alert } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Row, Col, Image, Alert, Button } from 'react-bootstrap';
+import { useParams, Routes, Route, NavLink } from 'react-router-dom';
 
 import SessionsList from '../../SessionsList/SessionsList';
+import AddSession from '../../AddSession/AddSession';
 
 import { getWorkshopById } from '../../../services/workshops';
 
@@ -58,8 +59,16 @@ const WorkshopDetails = () => {
                             <Col xs={12} lg={8} dangerouslySetInnerHTML={{ __html: workshop.description }}></Col>
                         </Row>
                         <Row>
+                            <Col xs={12} className="my-3">
+                                <Button as={NavLink} to="" size="sm" className="me-2" end>Sessions List</Button>
+                                <Button as={NavLink} to="add" size="sm">Add a session</Button>
+                            </Col>
+
                             <Col xs={12}>
-                                <SessionsList />
+                                <Routes>
+                                    <Route path="" element={<SessionsList />} />
+                                    <Route path="/add" element={<AddSession />} />
+                                </Routes>
                             </Col>
                         </Row>
                     </>

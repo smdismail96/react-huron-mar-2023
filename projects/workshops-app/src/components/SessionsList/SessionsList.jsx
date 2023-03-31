@@ -4,13 +4,15 @@ const SessionsList = () => {
             <h2>List of sessions</h2>
             <hr />
             {/* Task 4 */}
-            session list to be shown
-            <div>
+            <p>
+                <strong>TODO</strong>: session list to be shown
+            </p>
+            <p>
                 To call https://workshops-server.herokuapp.com/workshops/[[workshop_id]]/sessions
-            </div>
-            <div>
-                use ListGroup of React Bootstrap to show it. Install https://fontawesome.com/docs/web/use-with/react/ and use its icons for voting up / down icons.
-            </div>
+            </p>
+            <p>
+                Use ListGroup of React Bootstrap to show it. Install https://fontawesome.com/docs/web/use-with/react/ and use its icons for voting up / down icons.
+            </p>
         </div>
     );
 }
