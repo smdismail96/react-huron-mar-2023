@@ -1,4 +1,5 @@
 import { Container } from 'react-bootstrap';
+import { Routes, Route } from 'react-router-dom';
 
 import AppMenu from "./AppMenu/AppMenu";
 
@@ -15,10 +16,12 @@ const App = () => {
 
       {/* <div className="container"> */}
       <Container>
-        <Home />
-        <WorkshopsList />
-        <WorkshopDetails />
-        <Feedback />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/workshops" element={<WorkshopsList />} />
+          <Route path="/workshops/:id" element={<WorkshopDetails />} />
+          <Route path="/feedback" element={<Feedback />} />
+        </Routes>
       </Container>
     </>
   );

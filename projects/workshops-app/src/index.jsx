@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
 // Webpack allows us to import CSS files
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,6 +12,8 @@ console.log(x, y);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Application />
+    <BrowserRouter>
+      <Application />
+    </BrowserRouter>
   </React.StrictMode>
 );
