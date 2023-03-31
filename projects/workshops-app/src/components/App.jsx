@@ -1,11 +1,25 @@
+import { Container } from 'react-bootstrap';
+
 import AppMenu from "./AppMenu/AppMenu";
+
+import Home from './pages/Home/Home';
+import WorkshopsList from "./pages/WorkshopsList/WorkshopsList";
+import WorkshopDetails from "./pages/WorkshopDetails/WorkshopDetails";
+import Feedback from "./pages/Feedback/Feedback";
 
 // sfc
 const App = () => {
   return (
     <>
       <AppMenu />
-      <div className="container">Hello react</div>
+
+      {/* <div className="container"> */}
+      <Container>
+        <Home />
+        <WorkshopsList />
+        <WorkshopDetails />
+        <Feedback />
+      </Container>
     </>
   );
 }
