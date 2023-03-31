@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import AppMenu from "./AppMenu/AppMenu";
 
@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import WorkshopsList from "./pages/WorkshopsList/WorkshopsList";
 import WorkshopDetails from "./pages/WorkshopDetails/WorkshopDetails";
 import Feedback from "./pages/Feedback/Feedback";
+import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 // sfc
 const App = () => {
@@ -21,6 +22,9 @@ const App = () => {
           <Route path="/workshops" element={<WorkshopsList />} />
           <Route path="/workshops/:id" element={<WorkshopDetails />} />
           <Route path="/feedback" element={<Feedback />} />
+
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Container>
     </>
