@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello World</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            class ErrorBoundary extends React.Component {
+                state = {
+                    error: null,
+                };
+
+                componentDidCatch(error) {
+                    this.setState({
+                        // error: error,
+                        error,
+                    });
+                }
+
+                render() {
+                    // props has children (the elemnts within the ErrorBoundary element)
+                    console.log(this.props);
+                    const { error } = this.state;
+                    return error ? error.message : this.props.children;
+                }
+            }
+
+            const C = ({ id, throwError }) => {
+                if (throwError) {
+                    throw new Error("Some error occured");
+                }
+
+                return <div>I am C #{id}</div>;
+            };
+
+            const container = document.getElementById("root");
+            const root = ReactDOM.createRoot(container);
+            root.render(
+                <div className="container my-5">
+                    <ErrorBoundary>
+                        <C id={10} throwError={false} />
+                        <div>Hello</div>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <C id={20} throwError={true} />
+                        <C id={30} throwError={false} />
+                    </ErrorBoundary>
+                    <C id={2} throwError={false} />
+                </div>
+            );
+        </script>
+    </body>
+</html>

@@ -11,6 +11,10 @@
 -   Day 2 : March 30
     -   React - Lab guide.pdf - Q. 10 (short) / 11 (long), 14 (optional - you need to register at the website and wait for API key to be activated)
 
+## Wroskhops app
+
+-   https://vw-angular.s3.ap-south-1.amazonaws.com/index.html
+
 ## References
 
 -   https://www.robinwieruch.de/react-state-array-add-update-remove/
