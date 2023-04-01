@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Redux</title>
+    </head>
+    <body>
+        <div>
+            <button onclick="store.dispatch( decrement() )">-</button>
+            <span id="counter">0</span>
+            <button onclick="store.dispatch( increment() )">+</button>
+        </div>
+
+        <div>
+            Name:
+            <input
+                type="text"
+                oninput="store.dispatch( updateName( event.target.value ) )"
+            />
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js"></script>
+        <script>
+            // action types
+            const INCREMENT = "INCREMENT";
+            const DECREMENT = "DECREMENT";
+            const UPDATE_NAME = "UPDATE_NAME";
+
+            // action creators
+            const decrement = () => {
+                return {
+                    type: DECREMENT,
+                };
+            };
+
+            const increment = () => {
+                return {
+                    type: INCREMENT,
+                };
+            };
+
+            const updateName = (name) => {
+                return {
+                    type: UPDATE_NAME,
+                    payload: name,
+                };
+            };
+
+            const counterSlice = {
+                value: 0,
+            };
+
+            const counterReducer = (state = counterSlice, action) => {
+                console.log("reducer called");
+                console.log(state, action);
+
+                switch (action.type) {
+                    case DECREMENT:
+                        return {
+                            ...state,
+                            value: state.value - 1,
+                        };
+                    case INCREMENT:
+                        return {
+                            ...state,
+                            value: state.value + 1,
+                        };
+                    default:
+                        return state;
+                }
+            };
+
+            const profileSlice = {
+                name: "",
+            };
+
+            const profileReducer = (state = profileSlice, action) => {
+                switch (action.type) {
+                    case UPDATE_NAME:
+                        return {
+                            ...state,
+                            name: action.payload,
+                        };
+                    default:
+                        return state;
+                }
+            };
+
+            /**
+             * Global state
+             * {
+             *      counter: {
+             *          value: 0
+             *      },
+             *      profile: {
+             *          name: ''
+             *      }
+             * }
+             */
+            const rootReducer = Redux.combineReducers({
+                counter: counterReducer,
+                profile: profileReducer,
+            });
+            const store = Redux.createStore(rootReducer);
+
+            store.subscribe(() => {
+                document.getElementById("counter").innerText =
+                    store.getState().counter.value;
+            });
+        </script>
+    </body>
+</html>
