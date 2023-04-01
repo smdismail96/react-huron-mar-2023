@@ -8,63 +8,70 @@ import { postSession } from '../../services/sessions';
 const AddSession = () => {
     // {
     //     register() {},
+    //     handleSubmit() {},
     //     formState: {
     //         errors: {
     //              sequenceId: { type: 'required' }
-    //         }
+    //         },
+    //         getValues() {}
     //     }
     // }
-    const { register, formState: { errors } } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: {
+            errors
+        },
+        getValues
+    } = useForm({
         mode: 'all'
     });
+
+    // returns a boolean (true -> check passes)
+    const levelDuration = () => {
+        const duration = +getValues('duration');
+        const level = getValues('level');
+
+        switch (level) {
+            case 'Basic':
+                return duration >= 1;
+            case 'Intermediate':
+                return duration >= 2;
+            case 'Advanced':
+                return duration >= 3;
+            default:
+                return true;
+        }
+    };
 
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const addSession = async (event) => {
-        // Hey browser! please avoid doing anything
-        event.preventDefault();
-
+    // called only if valid (because of handleSubmit())
+    const addSession = async (formValues) => {
         // // refObj.current is the reference to the underlying DOM node
-        // const session = {
-        //     workshopId: +id,
-        //     upvoteCount: 0,
-        //     // sequenceId: sequenceId
-        //     sequenceId: +sequenceId,
-        //     name,
-        //     speaker,
-        //     duration: +duration,
-        //     level,
-        //     abstract
-        // };
+        const session = {
+            workshopId: +id,
+            upvoteCount: 0,
+            ...formValues,
+            sequenceId: +formValues.sequenceId,
+            duration: +formValues.duration,
+        };
 
-        // // for each input we can do this for validation
-        // // useEffect(
-        // //     () => {
-        // //         // do validation on sequenceId
-        // //         // set some error state on error
-        // //     },
-        // //     [sequenceId]
-        // // )
-
-        // console.log(session);
-
-        // // ideally validate the values here..
-
-        // try {
-        //     await postSession(session);
-        //     alert('Session has been added');
-        //     navigate('..'); // go one level up form the current path
-        // } catch (error) {
-        //     alert(error.message);
-        // }
+        try {
+            await postSession(session);
+            alert('Session has been added');
+            navigate('..'); // go one level up form the current path
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     return (
         <>
             <h2>Add a session</h2>
             <hr />
-            <Form onSubmit={addSession}>
+            <Form onSubmit={handleSubmit(addSession)}>
                 <Form.Group className="mb-3" controlId="sequenceId">
                     <Form.Label>Sequence ID</Form.Label>
                     <Form.Control
@@ -96,7 +103,7 @@ const AddSession = () => {
                     <Form.Label>Duration</Form.Label>
                     <Form.Control
                         type="text"
-                        {...register('duration', { required: true })}
+                        {...register('duration', { required: true, validate: levelDuration })}
                     />
                     {errors?.duration?.type === 'required' && <div className="text-danger">This field is required</div>}
                 </Form.Group>
@@ -104,7 +111,7 @@ const AddSession = () => {
                 <Form.Group className="mb-3" controlId="level">
                     <Form.Label>Level</Form.Label>
                     <Form.Select
-                        {...register('level', { required: true })}
+                        {...register('level', { required: true, validate: levelDuration })}
                     >
                         <option value="">-- Select level --</option>
                         <option value="Basic">Basic</option>
@@ -112,6 +119,7 @@ const AddSession = () => {
                         <option value="Advanced">Advanced</option>
                     </Form.Select>
                     {errors?.level?.type === 'required' && <div className="text-danger">This field is required</div>}
+                    {errors?.level?.type === 'validate' && <div className="text-danger">This duration is too less for the selected level</div>}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="abstract">
