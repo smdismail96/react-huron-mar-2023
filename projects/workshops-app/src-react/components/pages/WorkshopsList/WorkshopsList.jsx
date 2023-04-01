@@ -1,27 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import {
     SET_WORKSHOPS,
     SET_ERROR,
-    FETCH_WORKSHOPS,
+    SET_COMPLETED,
     PREVIOUS_PAGE,
     NEXT_PAGE
 } from '../../../actions/types';
-import { fetchWorkshops, previousPage } from '../../../actions/creators';
 
 import workshopsReducer, { initialState } from '../../../reducers/workshops';
 
 import { getWorkshops, deleteWorkshop } from '../../../services/workshops';
 
 function WorkshopsList() {
-    const { workshops, error, completed, page } = useSelector(state => state.workshopsList);
-    const dispatch = useDispatch();
+    const [state, dispatch] = React.useReducer(
+        workshopsReducer,
+        initialState
+    );
+
+    const { workshops, error, completed, page } = state;
 
     React.useEffect(() => {
-        // fetchWorkshops() returns a "function action"
-        // Thunk will execute that function
-        dispatch(fetchWorkshops(page));
+        async function helper() {
+            try {
+                dispatch({
+                    type: SET_COMPLETED,
+                    payload: false,
+                });
+                const data = await getWorkshops(page);
+                dispatch({
+                    type: SET_WORKSHOPS,
+                    payload: data,
+                });
+            } catch (error) {
+                dispatch({
+                    type: SET_ERROR,
+                    payload: error,
+                });
+            }
+        }
+
+        helper();
     }, [page]);
 
     const previous = () => {
@@ -30,9 +49,9 @@ function WorkshopsList() {
         // }
 
         // setPage(page - 1);
-        // Thunk sees this action an object (normal action)
-        // Thunk: "Ok, let me keep quiet, and pass on control to the next"
-        dispatch(previousPage());
+        dispatch({
+            type: PREVIOUS_PAGE,
+        });
     };
 
     const next = (event) => {

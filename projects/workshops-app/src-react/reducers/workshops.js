@@ -1,22 +1,14 @@
 import {
     SET_WORKSHOPS,
     SET_ERROR,
-    FETCH_WORKSHOPS,
+    SET_COMPLETED,
     PREVIOUS_PAGE,
     NEXT_PAGE
 } from '../actions/types';
 
-// named export
-export const initialState = {
-    workshops: [],
-    error: null,
-    completed: false,
-    page: 1,
-};
-
 // when an action is dispatched, the reducer is called
 // Job of the reducer : Given the current state, and action dispatched, it returns the new state
-export default function workshopsReducer(state = initialState, action) {
+export default function workshopsReducer(state, action) {
     switch (action.type) {
         case SET_WORKSHOPS:
             return {
@@ -30,10 +22,10 @@ export default function workshopsReducer(state = initialState, action) {
                 error: action.payload,
                 completed: true,
             };
-        case FETCH_WORKSHOPS:
+        case SET_COMPLETED:
             return {
                 ...state,
-                completed: false,
+                completed: action.payload,
             };
         case PREVIOUS_PAGE:
             return {
@@ -49,3 +41,11 @@ export default function workshopsReducer(state = initialState, action) {
             return state; // no change in state as action type is not one of the supported types
     }
 }
+
+// named export
+export const initialState = {
+    workshops: [],
+    error: null,
+    completed: false,
+    page: 1,
+};

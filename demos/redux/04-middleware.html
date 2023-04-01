@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Redux</title>
+    </head>
+    <body>
+        <div>
+            <button onclick="store.dispatch( { type: DECREMENT } )">-</button>
+            <span id="counter"></span>
+            <button onclick="store.dispatch( { type: INCREMENT } )">+</button>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js"></script>
+        <script>
+            // action types
+            const INCREMENT = "INCREMENT";
+            const DECREMENT = "DECREMENT";
+
+            const counterReducer = (state, action) => {
+                switch (action.type) {
+                    case DECREMENT:
+                        return {
+                            ...state,
+                            counter: state.counter - 1,
+                        };
+                    case INCREMENT:
+                        return {
+                            ...state,
+                            counter: state.counter + 1,
+                        };
+                    default:
+                        return state;
+                }
+            };
+
+            const logger = ( store ) => ( next ) => ( action ) => {
+                console.log("state = ", store.getState());
+                console.log("action.type = ", action.type);
+
+                next(action); // pass on control to the next middleware / store
+
+                // code to execute after state changes goes in here
+            };
+
+            const storeInLS = (store) => (next) => (action) => {
+                // do nothing when action is dispatched
+
+                next(action); // pass on control
+
+                // once the store updates
+                localStorage.setItem("counter", store.getState().counter);
+            };
+
+            const store = Redux.createStore(
+                counterReducer,
+                { counter: +localStorage.getItem("counter") || 0 },
+                Redux.applyMiddleware(logger, storeInLS)
+            );
+
+            const render = () => {
+                document.getElementById("counter").innerText =
+                    store.getState().counter;
+            };
+
+            render();
+
+            store.subscribe(render);
+        </script>
+    </body>
+</html>
