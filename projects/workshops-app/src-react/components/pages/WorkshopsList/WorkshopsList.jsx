@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import {
     SET_WORKSHOPS,
     SET_ERROR,
@@ -14,8 +13,12 @@ import workshopsReducer, { initialState } from '../../../reducers/workshops';
 import { getWorkshops, deleteWorkshop } from '../../../services/workshops';
 
 function WorkshopsList() {
-    const { workshops, error, completed, page } = useSelector(state => state.workshopsList);
-    const dispatch = useDispatch();
+    const [state, dispatch] = React.useReducer(
+        workshopsReducer,
+        initialState
+    );
+
+    const { workshops, error, completed, page } = state;
 
     React.useEffect(() => {
         async function helper() {

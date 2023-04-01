@@ -19,6 +19,7 @@
                 type="text"
                 oninput="store.dispatch( updateName( event.target.value ) )"
             />
+            <span id="name"></span>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js"></script>
@@ -108,6 +109,11 @@
             store.subscribe(() => {
                 document.getElementById("counter").innerText =
                     store.getState().counter.value;
+            });
+
+            store.subscribe(() => {
+                document.getElementById("name").innerText =
+                    store.getState().profile.name;
             });
         </script>
     </body>
