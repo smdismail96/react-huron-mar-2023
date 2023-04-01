@@ -81,7 +81,7 @@ function WorkshopsList() {
                 </div>
             </div>
             {!completed ? (
-                <div>Loading list of workshops</div>
+                <div data-testid="loading-message">Loading list of workshops</div>
             ) : null}
             {completed && !error && (
                 <ol>
