@@ -6,6 +6,14 @@ import { useForm } from 'react-hook-form';
 import { postSession } from '../../services/sessions';
 
 const AddSession = () => {
+    // we shall "control" the inputs using these
+    const [sequenceId, setSequenceId] = useState('');
+    const [name, setName] = useState('');
+    const [speaker, setSpeaker] = useState('');
+    const [duration, setDuration] = useState('');
+    const [level, setLevel] = useState('');
+    const [abstract, setAbstract] = useState('');
+
     // {
     //     register() {},
     //     formState: {
@@ -26,38 +34,38 @@ const AddSession = () => {
         event.preventDefault();
 
         // // refObj.current is the reference to the underlying DOM node
-        // const session = {
-        //     workshopId: +id,
-        //     upvoteCount: 0,
-        //     // sequenceId: sequenceId
-        //     sequenceId: +sequenceId,
-        //     name,
-        //     speaker,
-        //     duration: +duration,
-        //     level,
-        //     abstract
-        // };
+        const session = {
+            workshopId: +id,
+            upvoteCount: 0,
+            // sequenceId: sequenceId
+            sequenceId: +sequenceId,
+            name,
+            speaker,
+            duration: +duration,
+            level,
+            abstract
+        };
 
-        // // for each input we can do this for validation
-        // // useEffect(
-        // //     () => {
-        // //         // do validation on sequenceId
-        // //         // set some error state on error
-        // //     },
-        // //     [sequenceId]
-        // // )
+        // for each input we can do this for validation
+        // useEffect(
+        //     () => {
+        //         // do validation on sequenceId
+        //         // set some error state on error
+        //     },
+        //     [sequenceId]
+        // )
 
-        // console.log(session);
+        console.log(session);
 
-        // // ideally validate the values here..
+        // ideally validate the values here..
 
-        // try {
-        //     await postSession(session);
-        //     alert('Session has been added');
-        //     navigate('..'); // go one level up form the current path
-        // } catch (error) {
-        //     alert(error.message);
-        // }
+        try {
+            await postSession(session);
+            alert('Session has been added');
+            navigate('..'); // go one level up form the current path
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     return (
@@ -69,6 +77,8 @@ const AddSession = () => {
                     <Form.Label>Sequence ID</Form.Label>
                     <Form.Control
                         type="text"
+                        value={sequenceId}
+                        onChange={(event) => setSequenceId(event.target.value)}
                         {...register('sequenceId', { required: true })}
                     />
                     {errors?.sequenceId?.type === 'required' && <div className="text-danger">This field is required</div>}
@@ -78,6 +88,8 @@ const AddSession = () => {
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         type="text"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
                         {...register('name', { required: true })}
                     />
                     {errors?.name?.type === 'required' && <div className="text-danger">This field is required</div>}
@@ -87,6 +99,8 @@ const AddSession = () => {
                     <Form.Label>Speaker</Form.Label>
                     <Form.Control
                         type="text"
+                        value={speaker}
+                        onChange={(event) => setSpeaker(event.target.value)}
                         {...register('speaker', { required: true })}
                     />
                     {errors?.speaker?.type === 'required' && <div className="text-danger">This field is required</div>}
@@ -96,6 +110,8 @@ const AddSession = () => {
                     <Form.Label>Duration</Form.Label>
                     <Form.Control
                         type="text"
+                        value={duration}
+                        onChange={(event) => setDuration(event.target.value)}
                         {...register('duration', { required: true })}
                     />
                     {errors?.duration?.type === 'required' && <div className="text-danger">This field is required</div>}
@@ -104,6 +120,8 @@ const AddSession = () => {
                 <Form.Group className="mb-3" controlId="level">
                     <Form.Label>Level</Form.Label>
                     <Form.Select
+                        value={level}
+                        onChange={(event) => setLevel(event.target.value)}
                         {...register('level', { required: true })}
                     >
                         <option value="">-- Select level --</option>
@@ -119,10 +137,11 @@ const AddSession = () => {
                     <Form.Control
                         as="textarea"
                         type="text"
-                        {...register('abstract', { required: true, minLength: 10 })}
+                        value={abstract}
+                        onChange={(event) => setAbstract(event.target.value)}
+                        {...register('abstract', { required: true })}
                     />
                     {errors?.abstract?.type === 'required' && <div className="text-danger">This field is required</div>}
-                    {errors?.abstract?.type === 'minLength' && <div className="text-danger">Minimum 10 characters needed</div>}
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
