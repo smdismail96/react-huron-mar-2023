@@ -1,5 +1,8 @@
 import { useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+
+import { postSession } from '../../services/sessions';
 
 const AddSession = () => {
     const sequenceIdRef = useRef();
@@ -9,12 +12,17 @@ const AddSession = () => {
     const levelRef = useRef();
     const abstractRef = useRef();
 
-    const addSession = (event) => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const addSession = async (event) => {
         // Hey browser! please avoid doing anything
         event.preventDefault();
 
         // refObj.current is the reference to the underlying DOM node
         const session = {
+            workshopId: +id,
+            upvoteCount: 0,
             sequenceId: sequenceIdRef.current.value,
             name: nameRef.current.value,
             speaker: speakerRef.current.value,
@@ -24,6 +32,16 @@ const AddSession = () => {
         };
 
         console.log(session);
+
+        // ideally validate the values here..
+
+        try {
+            await postSession(session);
+            alert('Session has been added');
+            navigate('..'); // go one level up form the current path
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     return (

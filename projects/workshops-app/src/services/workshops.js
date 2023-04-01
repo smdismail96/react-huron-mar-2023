@@ -31,6 +31,10 @@ const deleteWorkshop = async (id) => {
             method: "DELETE", // Must be all caps
         }
     );
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
 };
 
 export {
