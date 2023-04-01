@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     SET_WORKSHOPS,
     SET_ERROR,
-    SET_COMPLETED,
+    FETCH_WORKSHOPS,
     PREVIOUS_PAGE,
     NEXT_PAGE
 } from '../../../actions/types';
+import { fetchWorkshops, previousPage } from '../../../actions/creators';
 
 import workshopsReducer, { initialState } from '../../../reducers/workshops';
 
@@ -18,26 +19,9 @@ function WorkshopsList() {
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        async function helper() {
-            try {
-                dispatch({
-                    type: SET_COMPLETED,
-                    payload: false,
-                });
-                const data = await getWorkshops(page);
-                dispatch({
-                    type: SET_WORKSHOPS,
-                    payload: data,
-                });
-            } catch (error) {
-                dispatch({
-                    type: SET_ERROR,
-                    payload: error,
-                });
-            }
-        }
-
-        helper();
+        // fetchWorkshops() returns a "function action"
+        // Thunk will execute that function
+        dispatch(fetchWorkshops(page));
     }, [page]);
 
     const previous = () => {
@@ -46,9 +30,9 @@ function WorkshopsList() {
         // }
 
         // setPage(page - 1);
-        dispatch({
-            type: PREVIOUS_PAGE,
-        });
+        // Thunk sees this action an object (normal action)
+        // Thunk: "Ok, let me keep quiet, and pass on control to the next"
+        dispatch(previousPage());
     };
 
     const next = (event) => {

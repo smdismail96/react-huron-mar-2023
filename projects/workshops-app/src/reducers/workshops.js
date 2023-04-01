@@ -1,7 +1,7 @@
 import {
     SET_WORKSHOPS,
     SET_ERROR,
-    SET_COMPLETED,
+    FETCH_WORKSHOPS,
     PREVIOUS_PAGE,
     NEXT_PAGE
 } from '../actions/types';
@@ -30,10 +30,10 @@ export default function workshopsReducer(state = initialState, action) {
                 error: action.payload,
                 completed: true,
             };
-        case SET_COMPLETED:
+        case FETCH_WORKSHOPS:
             return {
                 ...state,
-                completed: action.payload,
+                completed: false,
             };
         case PREVIOUS_PAGE:
             return {
