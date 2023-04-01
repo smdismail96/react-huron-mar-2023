@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Redux</title>
+    </head>
+    <body>
+        <div>
+            <button onclick="store.dispatch( decrement() )">-</button>
+            <span id="counter">0</span>
+            <button onclick="store.dispatch( increment() )">+</button>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js"></script>
+        <script>
+            // action types
+            const INCREMENT = "INCREMENT";
+            const DECREMENT = "DECREMENT";
+
+            // action creators
+            const decrement = () => {
+                return {
+                    type: DECREMENT,
+                };
+            };
+
+            const increment = () => {
+                return {
+                    type: INCREMENT,
+                };
+            };
+
+            const initialState = {
+                counter: 0,
+            };
+
+            // Reducer MUST be a "pure function"
+            // Rule 1: Will not affect any global state, including their own arguments
+            // Rule 2: They are predictable -> the output is a function of the inputs
+            const counterReducer = (state = initialState, action) => {
+                console.log("reducer called");
+                console.log(state, action);
+
+                switch (action.type) {
+                    case DECREMENT:
+                        // Rule 1 is violated
+                        // state.counter++;
+
+                        return {
+                            ...state,
+                            counter: state.counter - 1,
+                        };
+                    case INCREMENT:
+                        return {
+                            ...state,
+                            counter: state.counter + 1,
+                        };
+                    default:
+                        return state;
+                }
+
+                // what is state?
+            };
+
+            // reducer is called here (when store is created)
+            // state -> undefined (takes up default of initialState), { type: '@@redux/init' }
+            // reducer returns the initialState, and store updates state to initialState
+            const store = Redux.createStore(counterReducer);
+
+            store.subscribe(() => {
+                document.getElementById("counter").innerText =
+                    store.getState().counter;
+            });
+        </script>
+    </body>
+</html>
